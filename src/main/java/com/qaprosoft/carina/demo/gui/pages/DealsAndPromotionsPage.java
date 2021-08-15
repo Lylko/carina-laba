@@ -1,8 +1,8 @@
-package com.qaprosoft.carina.demo.gui.pages.amazon;
+package com.qaprosoft.carina.demo.gui.pages;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
-import com.qaprosoft.carina.demo.gui.components.amazon.DealsItem;
+import com.qaprosoft.carina.demo.gui.components.DealsItem;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -28,15 +28,15 @@ public class DealsAndPromotionsPage extends AbstractPage {
     }
 
     public ExtendedWebElement getSortBtn(){
-        return this.sortBtn;
+        return sortBtn;
     }
 
     public ExtendedWebElement getSortHighToLowBtn() {
-        return this.sortHighToLowBtn;
+        return sortHighToLowBtn;
     }
 
     public String getPageName() {
-        return this.pageName.getText();
+        return pageName.getText();
     }
 
     public List<DealsItem> getListOfDeals() {

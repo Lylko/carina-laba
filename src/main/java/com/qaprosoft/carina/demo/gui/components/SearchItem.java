@@ -1,4 +1,4 @@
-package com.qaprosoft.carina.demo.gui.components.amazon;
+package com.qaprosoft.carina.demo.gui.components;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
@@ -19,10 +19,14 @@ public class SearchItem extends AbstractUIObject {
     }
 
     public ExtendedWebElement getLinkToItem() {
-        return this.linkToItem;
+        return linkToItem;
     }
 
     public Double getItemPrice() {
         return Double.parseDouble(itemPrice.getText());
+    }
+
+    public boolean getVisibility(){
+        return itemPrice.isVisible();
     }
 }

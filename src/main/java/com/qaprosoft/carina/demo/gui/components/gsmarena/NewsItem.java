@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.qaprosoft.carina.demo.gui.components;
+package com.qaprosoft.carina.demo.gui.components.gsmarena;
 
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;

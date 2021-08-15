@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.qaprosoft.carina.demo.gui.components;
+package com.qaprosoft.carina.demo.gui.components.gsmarena;
 
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
@@ -21,26 +21,21 @@ import org.openqa.selenium.support.FindBy;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
-import com.qaprosoft.carina.demo.gui.pages.ModelInfoPage;
 
-public class ModelItem extends AbstractUIObject {
+public class WeValuePrivacyAd extends AbstractUIObject {
+	@FindBy(xpath = "//button[contains(@onclick, 'setAndSaveAllConsent')]")
+	private ExtendedWebElement okBtn;
 
-    @FindBy(xpath = ".//strong/span")
-    private ExtendedWebElement modelLabel;
+	public WeValuePrivacyAd(WebDriver driver, SearchContext searchContext) {
+		super(driver, searchContext);
+	}
 
-    @FindBy(xpath = ".//a")
-    private ExtendedWebElement modelLink;
+	public WeValuePrivacyAd(WebDriver driver) {
+		super(driver);
+	}
 
-    public ModelItem(WebDriver driver, SearchContext searchContext) {
-        super(driver, searchContext);
-    }
+	public void closeAdIfPresent() {
+		okBtn.clickIfPresent();
+	}
 
-    public String readModel() {
-        return modelLabel.getText();
-    }
-
-    public ModelInfoPage openModelPage() {
-        modelLink.click();
-        return new ModelInfoPage(driver);
-    }
 }

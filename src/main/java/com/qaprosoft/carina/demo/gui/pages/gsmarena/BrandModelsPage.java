@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.qaprosoft.carina.demo.gui.pages;
+package com.qaprosoft.carina.demo.gui.pages.gsmarena;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import com.qaprosoft.carina.core.gui.AbstractPage;
-import com.qaprosoft.carina.demo.gui.components.ModelItem;
+import com.qaprosoft.carina.demo.gui.components.gsmarena.ModelItem;
 
 public class BrandModelsPage extends AbstractPage {
     @FindBy(xpath = "//div[@id='review-body']//li")

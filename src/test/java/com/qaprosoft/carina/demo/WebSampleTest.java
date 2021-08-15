@@ -28,15 +28,15 @@ import com.zebrunner.agent.core.annotation.TestLabel;
 import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
 import com.qaprosoft.carina.core.foundation.utils.tag.Priority;
 import com.qaprosoft.carina.core.foundation.utils.tag.TestPriority;
-import com.qaprosoft.carina.demo.gui.components.FooterMenu;
-import com.qaprosoft.carina.demo.gui.components.NewsItem;
-import com.qaprosoft.carina.demo.gui.components.compare.ModelSpecs;
-import com.qaprosoft.carina.demo.gui.components.compare.ModelSpecs.SpecType;
-import com.qaprosoft.carina.demo.gui.pages.BrandModelsPage;
-import com.qaprosoft.carina.demo.gui.pages.CompareModelsPage;
-import com.qaprosoft.carina.demo.gui.pages.HomePage;
-import com.qaprosoft.carina.demo.gui.pages.ModelInfoPage;
-import com.qaprosoft.carina.demo.gui.pages.NewsPage;
+import com.qaprosoft.carina.demo.gui.components.gsmarena.FooterMenu;
+import com.qaprosoft.carina.demo.gui.components.gsmarena.NewsItem;
+import com.qaprosoft.carina.demo.gui.components.gsmarena.compare.ModelSpecs;
+import com.qaprosoft.carina.demo.gui.components.gsmarena.compare.ModelSpecs.SpecType;
+import com.qaprosoft.carina.demo.gui.pages.gsmarena.BrandModelsPage;
+import com.qaprosoft.carina.demo.gui.pages.gsmarena.CompareModelsPage;
+import com.qaprosoft.carina.demo.gui.pages.gsmarena.HomePage;
+import com.qaprosoft.carina.demo.gui.pages.gsmarena.ModelInfoPage;
+import com.qaprosoft.carina.demo.gui.pages.gsmarena.NewsPage;
 
 /**
  * This sample shows how create Web test.

@@ -1,11 +1,11 @@
-package com.qaprosoft.carina.demo.gui.pages.amazon;
+package com.qaprosoft.carina.demo.gui.pages;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-public class loginPage extends AbstractPage {
+public class LoginPage extends AbstractPage {
 
     @FindBy(xpath = "//input[@id = 'ap_email']")
     private ExtendedWebElement emailField;
@@ -22,27 +22,28 @@ public class loginPage extends AbstractPage {
     @FindBy(xpath = "//input[@id='signInSubmit']")
     private ExtendedWebElement signBtn;
 
-    public loginPage(WebDriver driver) {
+    public LoginPage(WebDriver driver) {
         super(driver);
     }
 
     public ExtendedWebElement getEmailField(){
-        return this.emailField;
+        return emailField;
     }
 
     public ExtendedWebElement getPassField(){
-        return this.passField;
+        return passField;
     }
 
     public ExtendedWebElement getContinueBtn(){
-        return this.continueBtn;
+        return continueBtn;
     }
 
     public ExtendedWebElement getSignBtn(){
-        return this.signBtn;
+        return signBtn;
     }
 
     public String getNotFoundMail(){
-        return this.notFoundMail.getText();
+        return notFoundMail.getText();
     }
+
 }

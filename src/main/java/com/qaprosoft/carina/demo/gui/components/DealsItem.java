@@ -1,4 +1,4 @@
-package com.qaprosoft.carina.demo.gui.components.amazon;
+package com.qaprosoft.carina.demo.gui.components;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
@@ -31,7 +31,7 @@ public class DealsItem extends AbstractUIObject {
     }
 
     public ExtendedWebElement getAddToCartBtn() {
-        return this.addToCartBtn;
+        return addToCartBtn;
     }
 
 }
