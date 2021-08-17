@@ -1,5 +1,6 @@
 package com.qaprosoft.carina.demo.gui.pages;
 
+import com.qaprosoft.carina.core.foundation.utils.R;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
@@ -44,6 +45,13 @@ public class LoginPage extends AbstractPage {
 
     public String getNotFoundMail(){
         return notFoundMail.getText();
+    }
+
+    public void makeLogin(){
+        getEmailField().type(R.TESTDATA.get("login"));
+        getContinueBtn().click();
+        getPassField().type(R.TESTDATA.get("password"));
+        getSignBtn().click();
     }
 
 }

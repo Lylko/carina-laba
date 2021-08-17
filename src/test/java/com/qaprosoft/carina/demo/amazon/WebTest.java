@@ -1,5 +1,6 @@
 package com.qaprosoft.carina.demo.amazon;
 
+import com.qaprosoft.carina.core.foundation.utils.R;
 import com.qaprosoft.carina.demo.gui.components.*;
 import com.qaprosoft.carina.demo.gui.pages.*;
 import org.apache.commons.collections.CollectionUtils;
@@ -28,11 +29,10 @@ public class WebTest implements IAbstractTest {
 
         NavigationTools navigationTools = new NavigationTools(getDriver());
         navigationTools.getLoginBtn().click();
+
         LoginPage loginPage = new LoginPage(getDriver());
-        loginPage.getEmailField().type("androsov406@gmail.com");
-        loginPage.getContinueBtn().click();
-        loginPage.getPassField().type("QWSAqwsa1234");
-        loginPage.getSignBtn().click();
+        loginPage.makeLogin();
+
         Assert.assertEquals(home.getHelloText(), "Hello, Igor", "User not authorised");
 
     }
@@ -47,11 +47,9 @@ public class WebTest implements IAbstractTest {
 
         NavigationTools navigationTools = new NavigationTools(getDriver());
         navigationTools.getLoginBtn().click();
+
         LoginPage loginPage = new LoginPage(getDriver());
-        loginPage.getEmailField().type("androsov406@gmail.com");
-        loginPage.getContinueBtn().click();
-        loginPage.getPassField().type("QWSAqwsa1234");
-        loginPage.getSignBtn().click();
+        loginPage.makeLogin();
 
         Assert.assertEquals(home.getHelloText(), "Hello, Igor", "User not authorised");
         navigationTools.getLoginBtn().hover();
@@ -164,10 +162,7 @@ public class WebTest implements IAbstractTest {
         navigationTools.getLoginBtn().click();
 
         LoginPage loginPage = new LoginPage(getDriver());
-        loginPage.getEmailField().type("androsov406@gmail.com");
-        loginPage.getContinueBtn().click();
-        loginPage.getPassField().type("QWSAqwsa1234");
-        loginPage.getSignBtn().click();
+        loginPage.makeLogin();
         Assert.assertEquals(home.getHelloText(), "Hello, Igor", "User not authorised");
 
         navigationTools.changeCountry();
@@ -231,10 +226,7 @@ public class WebTest implements IAbstractTest {
         NavigationTools navigationTools = new NavigationTools(getDriver());
         navigationTools.getLoginBtn().click();
         LoginPage loginPage = new LoginPage(getDriver());
-        loginPage.getEmailField().type("androsov406@gmail.com");
-        loginPage.getContinueBtn().click();
-        loginPage.getPassField().type("QWSAqwsa1234");
-        loginPage.getSignBtn().click();
+        loginPage.makeLogin();
         Assert.assertEquals(home.getHelloText(), "Hello, Igor", "User not authorised");
 
         navigationTools.getLoginBtn().hover();
