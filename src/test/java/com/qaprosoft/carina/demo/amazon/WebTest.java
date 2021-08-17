@@ -1,9 +1,6 @@
 package com.qaprosoft.carina.demo.amazon;
 
-import com.qaprosoft.carina.demo.gui.components.DealsItem;
-import com.qaprosoft.carina.demo.gui.components.NavigationMenu;
-import com.qaprosoft.carina.demo.gui.components.NavigationTools;
-import com.qaprosoft.carina.demo.gui.components.SearchItem;
+import com.qaprosoft.carina.demo.gui.components.*;
 import com.qaprosoft.carina.demo.gui.pages.*;
 import org.apache.commons.collections.CollectionUtils;
 import org.testng.Assert;
@@ -27,10 +24,10 @@ public class WebTest implements IAbstractTest {
 
         HomePage home = new HomePage(getDriver());
         home.open();
-
         Assert.assertTrue(home.isPageOpened(), "Home page is not opened!");
 
-        home.getLoginBtn().click();
+        NavigationTools navigationTools = new NavigationTools(getDriver());
+        navigationTools.getLoginBtn().click();
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.getEmailField().type("androsov406@gmail.com");
         loginPage.getContinueBtn().click();
@@ -46,10 +43,10 @@ public class WebTest implements IAbstractTest {
 
         HomePage home = new HomePage(getDriver());
         home.open();
-
         Assert.assertTrue(home.isPageOpened(), "Home page is not opened!");
 
-        home.getLoginBtn().click();
+        NavigationTools navigationTools = new NavigationTools(getDriver());
+        navigationTools.getLoginBtn().click();
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.getEmailField().type("androsov406@gmail.com");
         loginPage.getContinueBtn().click();
@@ -57,8 +54,10 @@ public class WebTest implements IAbstractTest {
         loginPage.getSignBtn().click();
 
         Assert.assertEquals(home.getHelloText(), "Hello, Igor", "User not authorised");
-        home.getLoginBtn().hover();
+        navigationTools.getLoginBtn().hover();
         home.getSignOutBtn().click();
+        home.open();
+        Assert.assertTrue(home.getHelloText().contains("Sign in"), "User is not logged out!");
 
     }
 
@@ -70,7 +69,8 @@ public class WebTest implements IAbstractTest {
 
         Assert.assertTrue(home.isPageOpened(), "Home page is not opened!");
 
-        home.getLoginBtn().click();
+        NavigationTools navigationTools = new NavigationTools(getDriver());
+        navigationTools.getLoginBtn().click();
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.getEmailField().type("unigorn@mail.ru");
         loginPage.getContinueBtn().click();
@@ -85,9 +85,16 @@ public class WebTest implements IAbstractTest {
         HomePage home = new HomePage(getDriver());
         home.open();
         Assert.assertTrue(home.isPageOpened(), "Home page is not opened!");
-        home.getChangeLangBtn().hover();
-        home.getDeutschLangBtn().click();
-        Assert.assertEquals(home.getHelloText(), "Hallo, Anmelden", "Language is not changed");
+
+        NavigationTools navigationTools = new NavigationTools(getDriver());
+        navigationTools.getChangeLangBtn().click();
+
+        LanguageSettingPage languageSettingPage = new LanguageSettingPage(getDriver());
+        languageSettingPage.getDeutschLangBtn().click();
+        languageSettingPage.getSaveBtn().click();
+
+        Assert.assertEquals(home.getHelloText(), "Hallo, Anmelden",
+                "Language is not changed");
 
     }
 
@@ -102,7 +109,8 @@ public class WebTest implements IAbstractTest {
         navigationMenu.openDealsPage();
 
         DealsAndPromotionsPage dealsPage = new DealsAndPromotionsPage(getDriver());
-        Assert.assertEquals(dealsPage.getPageName(), "Deals and Promotions", "Page with deals is not opened");
+        Assert.assertEquals(dealsPage.getPageName(), "Deals and Promotions",
+                "Page with deals is not opened");
         dealsPage.getSortBtn().click();
         dealsPage.getSortHighToLowBtn().click();
         List<DealsItem> dealsItems = dealsPage.getListOfDeals();
@@ -130,7 +138,8 @@ public class WebTest implements IAbstractTest {
         navigationMenu.openDealsPage();
 
         DealsAndPromotionsPage dealsPage = new DealsAndPromotionsPage(getDriver());
-        Assert.assertEquals(dealsPage.getPageName(), "Deals and Promotions", "Page with deals is not opened");
+        Assert.assertEquals(dealsPage.getPageName(), "Deals and Promotions",
+                "Page with deals is not opened");
 
         NavigationTools navigationTools = new NavigationTools(getDriver());
         navigationTools.changeCountry();
@@ -139,7 +148,8 @@ public class WebTest implements IAbstractTest {
         int randomNum = (int) (Math.random() * dealsPage.getListOfDeals().size());
         DealsItem item = dealsPage.getOnlyAvailableDeals().get(randomNum);
         item.getAddToCartBtn().click();
-        Assert.assertTrue(navigationTools.getCartCount() > prev, "Product not added to cart via deal page!");
+        Assert.assertTrue(navigationTools.getCartCount() > prev,
+                "Product not added to cart via deal page!");
 
     }
 
@@ -150,7 +160,9 @@ public class WebTest implements IAbstractTest {
         home.open();
         Assert.assertTrue(home.isPageOpened(), "Home page is not opened!");
 
-        home.getLoginBtn().click();
+        NavigationTools navigationTools = new NavigationTools(getDriver());
+        navigationTools.getLoginBtn().click();
+
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.getEmailField().type("androsov406@gmail.com");
         loginPage.getContinueBtn().click();
@@ -158,7 +170,6 @@ public class WebTest implements IAbstractTest {
         loginPage.getSignBtn().click();
         Assert.assertEquals(home.getHelloText(), "Hello, Igor", "User not authorised");
 
-        NavigationTools navigationTools = new NavigationTools(getDriver());
         navigationTools.changeCountry();
         Assert.assertTrue(navigationTools.getCountryName().contains("Canada"));
         navigationTools.getSearchBtn().click();
@@ -185,6 +196,98 @@ public class WebTest implements IAbstractTest {
         cartPage.getListOfCartItems().get(0).getDeleteBtn().click();
         Assert.assertTrue(navigationTools.getCartCount() < prev, "Product not deleted from cart!");
 
+    }
+
+    @Test()
+    public void testSearchField(){
+
+        HomePage home = new HomePage(getDriver());
+        home.open();
+        Assert.assertTrue(home.isPageOpened(), "Home page is not opened!");
+
+        NavigationTools navigationTools = new NavigationTools(getDriver());
+        navigationTools.getSearchField().click();
+        navigationTools.getSearchField().type("RTX 2060");
+        navigationTools.getSearchBtn().click();
+
+        SearchPage searchPage = new SearchPage(getDriver());
+        List<SearchItem> searchItems = searchPage.getSearchItems();
+        Assert.assertFalse(CollectionUtils.isEmpty(searchItems), "No available items found!");
+
+        int n = Math.min(searchItems.size(), 5);
+        for (int i = 0; i < n; i++){
+            Assert.assertTrue(searchItems.get(i).getLinkToItem().getText().contains("RTX 2060"));
+        }
+
+    }
+
+    @Test()
+    public void testChangingAccountName(){
+
+        HomePage home = new HomePage(getDriver());
+        home.open();
+        Assert.assertTrue(home.isPageOpened(), "Home page is not opened!");
+
+        NavigationTools navigationTools = new NavigationTools(getDriver());
+        navigationTools.getLoginBtn().click();
+        LoginPage loginPage = new LoginPage(getDriver());
+        loginPage.getEmailField().type("androsov406@gmail.com");
+        loginPage.getContinueBtn().click();
+        loginPage.getPassField().type("QWSAqwsa1234");
+        loginPage.getSignBtn().click();
+        Assert.assertEquals(home.getHelloText(), "Hello, Igor", "User not authorised");
+
+        navigationTools.getLoginBtn().hover();
+        navigationTools.getAccountBtn().click();
+
+        AccountPage accountPage = new AccountPage(getDriver());
+        Assert.assertTrue(accountPage.isPageOpened(), "Account page is not opened!");
+        accountPage.getLoginAndSecurityBtn().click();
+
+        SecurityPage securityPage = new SecurityPage(getDriver());
+        securityPage.getEditNameBtn().click();
+        securityPage.getChangeNameField().type("asd");
+        securityPage.getSaveBtn().click();
+        Assert.assertTrue(home.getHelloText().contains("asd"), "Name is not changed");
+
+        home.open();
+
+        navigationTools.getLoginBtn().hover();
+        navigationTools.getAccountBtn().click();
+
+        Assert.assertTrue(accountPage.isPageOpened(), "Account page is not opened!");
+        accountPage.getLoginAndSecurityBtn().click();
+        securityPage.getEditNameBtn().click();
+        securityPage.getChangeNameField().type("Igor");
+        securityPage.getSaveBtn().click();
+
+    }
+
+    @Test()
+    public void testCurrencyChanger(){
+
+        HomePage home = new HomePage(getDriver());
+        home.open();
+        Assert.assertTrue(home.isPageOpened(), "Home page is not opened!");
+
+        NavigationTools navigationTools = new NavigationTools(getDriver());
+        navigationTools.getChangeLangBtn().click();
+
+        LanguageSettingPage languageSettingPage = new LanguageSettingPage(getDriver());
+        languageSettingPage.getChangeCurrencyBtn().click();
+        languageSettingPage.getChangeToRubBtn().click();
+        languageSettingPage.getSaveBtn().click();
+
+        home.open();
+        Assert.assertTrue(home.isPageOpened(), "Home page is not opened!");
+
+        navigationTools.getSearchField().type("samsung");
+        navigationTools.getSearchBtn().click();
+
+        SearchPage searchPage = new SearchPage(getDriver());
+
+        Assert.assertTrue(searchPage.getSearchItems().get(0).getItemCurrency().contains("RUB"),
+                "Currency is not correct!");
     }
 
 }

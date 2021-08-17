@@ -10,8 +10,17 @@ public class NavigationTools extends AbstractUIObject {
     @FindBy(xpath = "//a[@id = \"nav-cart\"]")
     private ExtendedWebElement cartBtn;
 
+    @FindBy(xpath = "//span[contains(text(),'Account & Lists')]")
+    private ExtendedWebElement loginBtn;
+
+    @FindBy(xpath = "//span[contains(text(),'Account')]")
+    private ExtendedWebElement accountBtn;
+
     @FindBy(xpath = "//a[@id = \"nav-global-location-popover-link\"]")
     private ExtendedWebElement locationBtn;
+
+    @FindBy(xpath = "//a[@id='icp-nav-flyout']")
+    private ExtendedWebElement changeLangBtn;
 
     @FindBy(xpath = "//div[@class = \"nav-search-field \"]/input")
     private ExtendedWebElement searchField;
@@ -22,7 +31,7 @@ public class NavigationTools extends AbstractUIObject {
     @FindBy(xpath = "//a[@id = \"nav-cart\"]//span[@id = \"nav-cart-count\"]")
     private ExtendedWebElement cartCount;
 
-    @FindBy(xpath = "//div[@id=\"nav-global-location-slot\"]//div[@id=\"glow-ingress-block\"]")
+    @FindBy(xpath = "//span[contains(text(), \"Deliver to\")]//ancestor::a")
     private ExtendedWebElement countryName;
 
     public NavigationTools(WebDriver driver) {
@@ -53,6 +62,10 @@ public class NavigationTools extends AbstractUIObject {
         return countryName.getText();
     }
 
+    public ExtendedWebElement getChangeLangBtn() {
+        return changeLangBtn;
+    }
+
     public void changeCountry(){
         LocationBlock locationBlock = new LocationBlock(getDriver());
         locationBtn.click();
@@ -61,4 +74,11 @@ public class NavigationTools extends AbstractUIObject {
         locationBlock.getSubmitBtn().click();
     }
 
+    public ExtendedWebElement getLoginBtn() {
+        return loginBtn;
+    }
+
+    public ExtendedWebElement getAccountBtn() {
+        return accountBtn;
+    }
 }

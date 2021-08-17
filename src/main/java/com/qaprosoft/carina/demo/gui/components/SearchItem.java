@@ -14,6 +14,9 @@ public class SearchItem extends AbstractUIObject {
     @FindBy(xpath = ".//span[@class = \"a-price-whole\"]")
     private ExtendedWebElement itemPrice;
 
+    @FindBy(xpath = ".//span[@class = \"a-price-symbol\"]")
+    private ExtendedWebElement itemCurrency;
+
     public SearchItem(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
@@ -26,7 +29,8 @@ public class SearchItem extends AbstractUIObject {
         return Double.parseDouble(itemPrice.getText());
     }
 
-    public boolean getVisibility(){
-        return itemPrice.isVisible();
+    public String getItemCurrency(){
+        return itemCurrency.getText();
     }
+
 }
