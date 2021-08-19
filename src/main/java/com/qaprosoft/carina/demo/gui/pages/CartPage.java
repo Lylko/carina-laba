@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CartPage extends AbstractPage {
 
-    @FindBy(xpath = "//div[contains(@id, \"sc-item\")]")
+    @FindBy(xpath = "//div[contains(@id, 'sc-item')]")
     private List<CartItem> listOfCartItems;
 
     public CartPage(WebDriver driver) {

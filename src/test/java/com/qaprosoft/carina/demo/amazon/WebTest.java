@@ -1,6 +1,5 @@
 package com.qaprosoft.carina.demo.amazon;
 
-import com.qaprosoft.carina.core.foundation.utils.R;
 import com.qaprosoft.carina.demo.gui.components.*;
 import com.qaprosoft.carina.demo.gui.pages.*;
 import org.apache.commons.collections.CollectionUtils;
@@ -28,7 +27,7 @@ public class WebTest implements IAbstractTest {
         Assert.assertTrue(home.isPageOpened(), "Home page is not opened!");
 
         NavigationTools navigationTools = new NavigationTools(getDriver());
-        navigationTools.getLoginBtn().click();
+        navigationTools.tapLoginBtn();
 
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.makeLogin();
@@ -37,7 +36,6 @@ public class WebTest implements IAbstractTest {
 
     }
 
-//    !!!!
     @Test()
     public void testSignOut(){
 
@@ -46,14 +44,14 @@ public class WebTest implements IAbstractTest {
         Assert.assertTrue(home.isPageOpened(), "Home page is not opened!");
 
         NavigationTools navigationTools = new NavigationTools(getDriver());
-        navigationTools.getLoginBtn().click();
+        navigationTools.tapLoginBtn();
 
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.makeLogin();
 
         Assert.assertEquals(home.getHelloText(), "Hello, Igor", "User not authorised");
-        navigationTools.getLoginBtn().hover();
-        home.getSignOutBtn().click();
+        navigationTools.hoverLoginBtn();
+        navigationTools.tapSignOutBtn();
         home.open();
         Assert.assertTrue(home.getHelloText().contains("Sign in"), "User is not logged out!");
 
@@ -68,11 +66,11 @@ public class WebTest implements IAbstractTest {
         Assert.assertTrue(home.isPageOpened(), "Home page is not opened!");
 
         NavigationTools navigationTools = new NavigationTools(getDriver());
-        navigationTools.getLoginBtn().click();
+        navigationTools.tapLoginBtn();
         LoginPage loginPage = new LoginPage(getDriver());
-        loginPage.getEmailField().type("unigorn@mail.ru");
-        loginPage.getContinueBtn().click();
-        Assert.assertEquals(loginPage.getNotFoundMail(), "We cannot find an account with that " +
+        loginPage.typeLogin("unigorn@mail.ru");
+        loginPage.tapContinueBtn();
+        Assert.assertEquals(loginPage.getNotFoundMailText(), "We cannot find an account with that " +
                 "email address", "Message doesnt exist.");
 
     }
@@ -85,11 +83,11 @@ public class WebTest implements IAbstractTest {
         Assert.assertTrue(home.isPageOpened(), "Home page is not opened!");
 
         NavigationTools navigationTools = new NavigationTools(getDriver());
-        navigationTools.getChangeLangBtn().click();
+        navigationTools.tapChangeLangBtn();
 
         LanguageSettingPage languageSettingPage = new LanguageSettingPage(getDriver());
-        languageSettingPage.getDeutschLangBtn().click();
-        languageSettingPage.getSaveBtn().click();
+        languageSettingPage.tapDeutschLangBtn();
+        languageSettingPage.tapSaveBtn();
 
         Assert.assertEquals(home.getHelloText(), "Hallo, Anmelden",
                 "Language is not changed");
@@ -109,8 +107,8 @@ public class WebTest implements IAbstractTest {
         DealsAndPromotionsPage dealsPage = new DealsAndPromotionsPage(getDriver());
         Assert.assertEquals(dealsPage.getPageName(), "Deals and Promotions",
                 "Page with deals is not opened");
-        dealsPage.getSortBtn().click();
-        dealsPage.getSortHighToLowBtn().click();
+        dealsPage.tapSortBtn();
+        dealsPage.tapSortHighToLowBtn();
         List<DealsItem> dealsItems = dealsPage.getListOfDeals();
         Assert.assertFalse(CollectionUtils.isEmpty(dealsItems), "No deals found!");
         List<Double> priceList = new ArrayList<>();
@@ -126,7 +124,7 @@ public class WebTest implements IAbstractTest {
     }
 
     @Test()
-    public void testAddingToCart(){
+    public void testAddingDealToCart(){
 
         HomePage home = new HomePage(getDriver());
         home.open();
@@ -145,7 +143,8 @@ public class WebTest implements IAbstractTest {
 
         int randomNum = (int) (Math.random() * dealsPage.getListOfDeals().size());
         DealsItem item = dealsPage.getOnlyAvailableDeals().get(randomNum);
-        item.getAddToCartBtn().click();
+        item.tapAddToCartBtn();
+        pause(1);
         Assert.assertTrue(navigationTools.getCartCount() > prev,
                 "Product not added to cart via deal page!");
 
@@ -159,7 +158,7 @@ public class WebTest implements IAbstractTest {
         Assert.assertTrue(home.isPageOpened(), "Home page is not opened!");
 
         NavigationTools navigationTools = new NavigationTools(getDriver());
-        navigationTools.getLoginBtn().click();
+        navigationTools.tapLoginBtn();
 
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.makeLogin();
@@ -167,28 +166,28 @@ public class WebTest implements IAbstractTest {
 
         navigationTools.changeCountry();
         Assert.assertTrue(navigationTools.getCountryName().contains("Canada"));
-        navigationTools.getSearchBtn().click();
-        navigationTools.getSearchField().type("keyboard");
-        navigationTools.getSearchBtn().click();
+        navigationTools.tapSearchBtn();
+        navigationTools.typeInSearchField("keyboard");
+        navigationTools.tapSearchBtn();
 
         SearchPage searchPage = new SearchPage(getDriver());
         Assert.assertFalse(CollectionUtils.isEmpty(searchPage.getSearchItems()), "No available items found!");
         int randomNum = (int) (Math.random() * searchPage.getSearchItems().size());
         SearchItem item = searchPage.getSearchItems().get(randomNum);
-        item.getLinkToItem().click();
+        item.tapLinkToItem();
 
         ItemPage itemPage = new ItemPage(getDriver());
         int prev = navigationTools.getCartCount();
-        itemPage.getAddToCartBtn().click();
+        itemPage.tapAddToCartBtn();
         pause(3);
         home.open();
         Assert.assertTrue(navigationTools.getCartCount() > prev, "Product not added to cart!");
 
-        navigationTools.getCartBtn().click();
+        navigationTools.tapCartBtn();
         CartPage cartPage = new CartPage(getDriver());
         Assert.assertTrue(cartPage.isPageOpened(), "Cart page is not opened!");
         prev = navigationTools.getCartCount();
-        cartPage.getListOfCartItems().get(0).getDeleteBtn().click();
+        cartPage.getListOfCartItems().get(0).tapDeleteBtn();
         Assert.assertTrue(navigationTools.getCartCount() < prev, "Product not deleted from cart!");
 
     }
@@ -201,9 +200,8 @@ public class WebTest implements IAbstractTest {
         Assert.assertTrue(home.isPageOpened(), "Home page is not opened!");
 
         NavigationTools navigationTools = new NavigationTools(getDriver());
-        navigationTools.getSearchField().click();
-        navigationTools.getSearchField().type("RTX 2060");
-        navigationTools.getSearchBtn().click();
+        navigationTools.typeInSearchField("RTX 2060");
+        navigationTools.tapSearchBtn();
 
         SearchPage searchPage = new SearchPage(getDriver());
         List<SearchItem> searchItems = searchPage.getSearchItems();
@@ -211,7 +209,7 @@ public class WebTest implements IAbstractTest {
 
         int n = Math.min(searchItems.size(), 5);
         for (int i = 0; i < n; i++){
-            Assert.assertTrue(searchItems.get(i).getLinkToItem().getText().contains("RTX 2060"));
+            Assert.assertTrue(searchItems.get(i).getLinkToItemText().contains("RTX 2060"));
         }
 
     }
@@ -224,34 +222,35 @@ public class WebTest implements IAbstractTest {
         Assert.assertTrue(home.isPageOpened(), "Home page is not opened!");
 
         NavigationTools navigationTools = new NavigationTools(getDriver());
-        navigationTools.getLoginBtn().click();
+        navigationTools.tapLoginBtn();
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.makeLogin();
         Assert.assertEquals(home.getHelloText(), "Hello, Igor", "User not authorised");
 
-        navigationTools.getLoginBtn().hover();
-        navigationTools.getAccountBtn().click();
+        navigationTools.hoverLoginBtn();
+        navigationTools.tapAccountBtn();
 
         AccountPage accountPage = new AccountPage(getDriver());
         Assert.assertTrue(accountPage.isPageOpened(), "Account page is not opened!");
-        accountPage.getLoginAndSecurityBtn().click();
+        accountPage.tapLoginAndSecurityBtn();
 
         SecurityPage securityPage = new SecurityPage(getDriver());
-        securityPage.getEditNameBtn().click();
-        securityPage.getChangeNameField().type("asd");
-        securityPage.getSaveBtn().click();
+        securityPage.tapEditNameBtn();
+        securityPage.typeName("asd");
+        securityPage.tapSaveBtn();
         Assert.assertTrue(home.getHelloText().contains("asd"), "Name is not changed");
 
         home.open();
 
-        navigationTools.getLoginBtn().hover();
-        navigationTools.getAccountBtn().click();
+        navigationTools.hoverLoginBtn();
+        navigationTools.tapAccountBtn();
 
         Assert.assertTrue(accountPage.isPageOpened(), "Account page is not opened!");
-        accountPage.getLoginAndSecurityBtn().click();
-        securityPage.getEditNameBtn().click();
-        securityPage.getChangeNameField().type("Igor");
-        securityPage.getSaveBtn().click();
+        accountPage.tapLoginAndSecurityBtn();
+        securityPage.tapEditNameBtn();
+        securityPage.typeName("Igor");
+        securityPage.tapSaveBtn();
+        Assert.assertTrue(home.getHelloText().contains("Igor"), "Name is not changed");
 
     }
 
@@ -263,18 +262,18 @@ public class WebTest implements IAbstractTest {
         Assert.assertTrue(home.isPageOpened(), "Home page is not opened!");
 
         NavigationTools navigationTools = new NavigationTools(getDriver());
-        navigationTools.getChangeLangBtn().click();
+        navigationTools.tapChangeLangBtn();
 
         LanguageSettingPage languageSettingPage = new LanguageSettingPage(getDriver());
-        languageSettingPage.getChangeCurrencyBtn().click();
-        languageSettingPage.getChangeToRubBtn().click();
-        languageSettingPage.getSaveBtn().click();
+        languageSettingPage.tapChangeCurrencyBtn();
+        languageSettingPage.tapChangeToRubBtn();
+        languageSettingPage.tapSaveBtn();
 
         home.open();
         Assert.assertTrue(home.isPageOpened(), "Home page is not opened!");
 
-        navigationTools.getSearchField().type("samsung");
-        navigationTools.getSearchBtn().click();
+        navigationTools.typeInSearchField("samsung");
+        navigationTools.tapSearchBtn();
 
         SearchPage searchPage = new SearchPage(getDriver());
 

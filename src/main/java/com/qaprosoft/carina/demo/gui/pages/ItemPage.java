@@ -7,14 +7,14 @@ import org.openqa.selenium.support.FindBy;
 
 public class ItemPage extends AbstractPage {
 
-    @FindBy(xpath = "//div[@class = \"a-box-group\"]//input[@id = \"add-to-cart-button\"]")
+    @FindBy(id = "add-to-cart-button")
     private ExtendedWebElement addToCartBtn;
 
     public ItemPage(WebDriver driver) {
         super(driver);
     }
 
-    public ExtendedWebElement getAddToCartBtn() {
-        return addToCartBtn;
+    public void tapAddToCartBtn() {
+        addToCartBtn.click();
     }
 }
