@@ -10,39 +10,39 @@ public class LanguageSettingPage extends AbstractUIObject {
     @FindBy(xpath = "//span[contains(text(),'Deutsch')]")
     private ExtendedWebElement deutschLangBtn;
 
-    @FindBy(xpath = "//span[@role = \"button\"]")
+    @FindBy(xpath = "//span[@role = 'button']")
     private ExtendedWebElement changeCurrencyBtn;
 
-    @FindBy(xpath = "//a[contains(text(),\"USD\")]")
+    @FindBy(xpath = "//a[contains(text(), 'USD')]")
     private ExtendedWebElement changeToUsdBtn;
 
-    @FindBy(xpath = "//a[contains(text(),\"RUB\")]")
+    @FindBy(xpath = "//a[contains(text(), 'RUB')]")
     private ExtendedWebElement changeToRubBtn;
 
-    @FindBy(xpath = "//div[@id=\"customer-preferences\"]//input[@type = \"submit\"]")
+    @FindBy(xpath = "//div[@id = 'customer-preferences']//input[@type = 'submit']")
     private ExtendedWebElement saveBtn;
 
     public LanguageSettingPage(WebDriver driver) {
         super(driver);
     }
 
-    public ExtendedWebElement getDeutschLangBtn() {
-        return deutschLangBtn;
+    public void tapDeutschLangBtn() {
+        deutschLangBtn.click();
     }
 
-    public ExtendedWebElement getChangeCurrencyBtn() {
-        return changeCurrencyBtn;
+    public void tapChangeCurrencyBtn() {
+        changeCurrencyBtn.click();
     }
 
-    public ExtendedWebElement getChangeToUsdBtn() {
-        return changeToUsdBtn;
+    public void tapChangeToUsdBtn() {
+        changeToUsdBtn.click();
     }
 
-    public ExtendedWebElement getChangeToRubBtn() {
-        return changeToRubBtn;
+    public void tapChangeToRubBtn() {
+        changeToRubBtn.click();
     }
 
-    public ExtendedWebElement getSaveBtn() {
-        return saveBtn;
+    public void tapSaveBtn() {
+        saveBtn.click();
     }
 }

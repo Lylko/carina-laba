@@ -8,14 +8,14 @@ import org.openqa.selenium.support.FindBy;
 
 public class CartItem extends AbstractUIObject {
 
-    @FindBy(xpath = ".//input[@value = \"Delete\"]")
+    @FindBy(xpath = ".//input[@value = 'Delete']")
     private ExtendedWebElement deleteBtn;
 
     public CartItem(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
 
-    public ExtendedWebElement getDeleteBtn() {
-        return deleteBtn;
+    public void tapDeleteBtn() {
+        deleteBtn.click();
     }
 }

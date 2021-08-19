@@ -17,22 +17,22 @@ public class DealsAndPromotionsPage extends AbstractPage {
     @FindBy(xpath = "//a[contains(text(), 'Price - High to Low')]")
     private ExtendedWebElement sortHighToLowBtn;
 
-    @FindBy(xpath = "//b[contains(text(), \"Deals and Promotions\")]")
+    @FindBy(xpath = "//b[contains(text(), 'Deals and Promotions')]")
     private ExtendedWebElement pageName;
 
-    @FindBy(xpath = "//div[contains(@id, \"dealView\")]")
+    @FindBy(xpath = "//div[contains(@id, 'dealView')]")
     private List<DealsItem> listOfDeals;
 
     public DealsAndPromotionsPage(WebDriver driver) {
         super(driver);
     }
 
-    public ExtendedWebElement getSortBtn(){
-        return sortBtn;
+    public void tapSortBtn(){
+        sortBtn.click();
     }
 
-    public ExtendedWebElement getSortHighToLowBtn() {
-        return sortHighToLowBtn;
+    public void tapSortHighToLowBtn() {
+        sortHighToLowBtn.click();
     }
 
     public String getPageName() {
@@ -47,7 +47,7 @@ public class DealsAndPromotionsPage extends AbstractPage {
         List<DealsItem> dealsItems = getListOfDeals();
         List<DealsItem> newList = new ArrayList<>();
         for (DealsItem item : dealsItems){
-            if ("Add to Cart".equals(item.getAddToCartBtn().getText())){
+            if ("Add to Cart".equals(item.getAddToCartText())){
                 newList.add(item);
             }
         }

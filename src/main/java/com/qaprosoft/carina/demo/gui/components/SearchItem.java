@@ -11,18 +11,22 @@ public class SearchItem extends AbstractUIObject {
     @FindBy(xpath = ".//h2/a")
     private ExtendedWebElement linkToItem;
 
-    @FindBy(xpath = ".//span[@class = \"a-price-whole\"]")
+    @FindBy(xpath = ".//span[@class = 'a-price-whole']")
     private ExtendedWebElement itemPrice;
 
-    @FindBy(xpath = ".//span[@class = \"a-price-symbol\"]")
+    @FindBy(xpath = ".//span[@class = 'a-price-symbol']")
     private ExtendedWebElement itemCurrency;
 
     public SearchItem(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
 
-    public ExtendedWebElement getLinkToItem() {
-        return linkToItem;
+    public void tapLinkToItem() {
+        linkToItem.click();
+    }
+
+    public String getLinkToItemText() {
+        return linkToItem.getText();
     }
 
     public Double getItemPrice() {

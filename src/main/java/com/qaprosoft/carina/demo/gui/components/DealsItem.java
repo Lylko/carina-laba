@@ -15,10 +15,10 @@ public class DealsItem extends AbstractUIObject {
     @FindBy(xpath = ".//span[contains(@class, 'dealPriceText')]")
     private ExtendedWebElement dealPrice;
 
-    @FindBy(xpath = ".//button[@type = \"button\"]")
+    @FindBy(xpath = ".//button[@type = 'button']")
     private ExtendedWebElement addToCartBtn;
 
-    @FindBy(xpath = ".//a[@role = \"button\"]")
+    @FindBy(xpath = ".//a[@role = 'button']")
     private ExtendedWebElement dealBtn;
 
     public DealsItem(WebDriver driver, SearchContext searchContext) {
@@ -30,8 +30,14 @@ public class DealsItem extends AbstractUIObject {
         return Double.parseDouble(array[0]);
     }
 
-    public ExtendedWebElement getAddToCartBtn() {
-        return addToCartBtn;
+    public void tapAddToCartBtn() {
+        addToCartBtn.click();
     }
+
+    public String getAddToCartText() {
+        return addToCartBtn.getText();
+    }
+
+
 
 }

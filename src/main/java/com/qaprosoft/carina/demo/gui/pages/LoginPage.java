@@ -1,10 +1,14 @@
 package com.qaprosoft.carina.demo.gui.pages;
 
+import com.qaprosoft.carina.core.foundation.commons.SpecialKeywords;
+import com.qaprosoft.carina.core.foundation.crypto.CryptoTool;
 import com.qaprosoft.carina.core.foundation.utils.R;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.regex.Pattern;
 
 public class LoginPage extends AbstractPage {
 
@@ -27,31 +31,37 @@ public class LoginPage extends AbstractPage {
         super(driver);
     }
 
-    public ExtendedWebElement getEmailField(){
-        return emailField;
+    public void typeLogin(String login){
+        emailField.type(login);
     }
 
-    public ExtendedWebElement getPassField(){
-        return passField;
+    public void typePassword(String password){
+        passField.type(password);
     }
 
-    public ExtendedWebElement getContinueBtn(){
-        return continueBtn;
+    public void tapContinueBtn(){
+        continueBtn.click();
     }
 
-    public ExtendedWebElement getSignBtn(){
-        return signBtn;
+    public void tapSignBtn(){
+        signBtn.click();
     }
 
-    public String getNotFoundMail(){
+    public String getNotFoundMailText(){
         return notFoundMail.getText();
     }
 
     public void makeLogin(){
-        getEmailField().type(R.TESTDATA.get("login"));
-        getContinueBtn().click();
-        getPassField().type(R.TESTDATA.get("password"));
-        getSignBtn().click();
+
+        CryptoTool cryptoTool = new CryptoTool("D:/crypto.key");
+        Pattern CRYPTO_PATTERN = Pattern.compile(SpecialKeywords.CRYPT);
+
+        typeLogin(cryptoTool.decryptByPattern(R.TESTDATA.get("login"), CRYPTO_PATTERN).
+                replaceAll("\"", ""));
+        tapContinueBtn();
+        typePassword(cryptoTool.decryptByPattern(R.TESTDATA.get("password"), CRYPTO_PATTERN).
+                replaceAll("\"", ""));
+        tapSignBtn();
     }
 
 }

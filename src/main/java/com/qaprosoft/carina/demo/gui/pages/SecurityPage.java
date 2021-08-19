@@ -7,28 +7,28 @@ import org.openqa.selenium.support.FindBy;
 
 public class SecurityPage extends AbstractPage {
 
-    @FindBy(xpath = "//span[contains(text(), \"Edit\")]/preceding-sibling::input[contains(@id, \"name-button\")]")
+    @FindBy(xpath = "//span[contains(text(), 'Edit')]/preceding-sibling::input[contains(@id, 'name-button')]")
     private ExtendedWebElement editNameBtn;
 
-    @FindBy(xpath = "//input[@id = \"ap_customer_name\"]")
+    @FindBy(xpath = "//input[@id = 'ap_customer_name']")
     private ExtendedWebElement changeNameField;
 
-    @FindBy(xpath = "//input[@class = \"a-button-input\"]")
+    @FindBy(xpath = "//input[@class = 'a-button-input']")
     private ExtendedWebElement saveBtn;
 
     public SecurityPage(WebDriver driver) {
         super(driver);
     }
 
-    public ExtendedWebElement getEditNameBtn() {
-        return editNameBtn;
+    public void tapEditNameBtn() {
+        editNameBtn.click();
     }
 
-    public ExtendedWebElement getChangeNameField() {
-        return changeNameField;
+    public void typeName(String name) {
+        changeNameField.type(name);
     }
 
-    public ExtendedWebElement getSaveBtn() {
-        return saveBtn;
+    public void tapSaveBtn() {
+        saveBtn.click();
     }
 }

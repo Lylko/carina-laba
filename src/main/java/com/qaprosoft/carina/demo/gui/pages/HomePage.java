@@ -12,9 +12,6 @@ public class HomePage extends AbstractPage {
     @FindBy(xpath = "//span[contains(text(),'Hello, ') or contains(text(),'Hallo, ')]")
     private ExtendedWebElement helloText;
 
-    @FindBy(xpath = "//span[contains(text(),'Sign Out')]")
-    private ExtendedWebElement signOutBtn;
-
     public HomePage(WebDriver driver) {
         super(driver);
         setPageAbsoluteURL(R.CONFIG.get(Configuration.Parameter.URL.getKey()));
@@ -22,10 +19,6 @@ public class HomePage extends AbstractPage {
 
     public String getHelloText(){
         return helloText.getText();
-    }
-
-    public ExtendedWebElement getSignOutBtn(){
-        return signOutBtn;
     }
 
 }

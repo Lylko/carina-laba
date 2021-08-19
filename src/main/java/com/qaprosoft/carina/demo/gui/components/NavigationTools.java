@@ -31,54 +31,65 @@ public class NavigationTools extends AbstractUIObject {
     @FindBy(xpath = "//a[@id = \"nav-cart\"]//span[@id = \"nav-cart-count\"]")
     private ExtendedWebElement cartCount;
 
-    @FindBy(xpath = "//span[contains(text(), \"Deliver to\")]//ancestor::a")
+    @FindBy(xpath = "//span[contains(text(), 'Deliver to')]//ancestor::a")
     private ExtendedWebElement countryName;
+
+    @FindBy(xpath = "//span[contains(text(),'Sign Out')]")
+    private ExtendedWebElement signOutBtn;
 
     public NavigationTools(WebDriver driver) {
         super(driver);
     }
 
-    public ExtendedWebElement getCartBtn() {
-        return cartBtn;
+    public void tapCartBtn() {
+        cartBtn.click();
     }
 
     public int getCartCount() {
         return Integer.parseInt(cartCount.getText());
     }
 
-    public ExtendedWebElement getSearchField() {
-        return searchField;
+    public void typeInSearchField(String request) {
+        searchField.type(request);
     }
 
-    public ExtendedWebElement getSearchBtn() {
-        return searchBtn;
+    public void tapSearchBtn() {
+        searchBtn.click();
     }
 
-    public ExtendedWebElement getLocationBtn() {
-        return locationBtn;
+    public void tapLocationBtn() {
+        locationBtn.click();
     }
 
     public String getCountryName() {
         return countryName.getText();
     }
 
-    public ExtendedWebElement getChangeLangBtn() {
-        return changeLangBtn;
+    public void tapChangeLangBtn() {
+        changeLangBtn.click();
     }
 
     public void changeCountry(){
         LocationBlock locationBlock = new LocationBlock(getDriver());
         locationBtn.click();
-        locationBlock.getLocationSelector().click();
-        locationBlock.getChangeToCanadaBtn().click();
-        locationBlock.getSubmitBtn().click();
+        locationBlock.chooseLocationSelector();
+        locationBlock.tapChangeToCanadaBtn();
+        locationBlock.tapSubmitBtn();
     }
 
-    public ExtendedWebElement getLoginBtn() {
-        return loginBtn;
+    public void tapSignOutBtn(){
+        signOutBtn.click();
     }
 
-    public ExtendedWebElement getAccountBtn() {
-        return accountBtn;
+    public void tapLoginBtn() {
+        loginBtn.click();
+    }
+
+    public void hoverLoginBtn() {
+        loginBtn.hover();
+    }
+
+    public void tapAccountBtn() {
+        accountBtn.click();
     }
 }

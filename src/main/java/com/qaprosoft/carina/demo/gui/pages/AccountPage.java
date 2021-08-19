@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class AccountPage extends AbstractPage {
 
-    @FindBy(xpath = "//h2[contains(text(), \"Login & security\")]/ancestor::a")
+    @FindBy(xpath = "//h2[contains(text(), 'Login & security')]/ancestor::a")
     private ExtendedWebElement loginAndSecurityBtn;
 
     public AccountPage(WebDriver driver) {
@@ -15,7 +15,7 @@ public class AccountPage extends AbstractPage {
         setPageURL("/gp/css/homepage.html?ref_=nav_AccountFlyout_ya");
     }
 
-    public ExtendedWebElement getLoginAndSecurityBtn() {
-        return loginAndSecurityBtn;
+    public void tapLoginAndSecurityBtn() {
+        loginAndSecurityBtn.click();
     }
 }
