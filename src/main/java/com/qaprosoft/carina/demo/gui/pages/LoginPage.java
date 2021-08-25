@@ -53,7 +53,8 @@ public class LoginPage extends AbstractPage {
 
     public void makeLogin(){
 
-        CryptoTool cryptoTool = new CryptoTool("D:/crypto.key");
+        CryptoTool cryptoTool = new CryptoTool("/Users/iandrosau/Documents/IdeaProjects/carina-demo/" +
+                "src/main/resources/crypto.key");
         Pattern CRYPTO_PATTERN = Pattern.compile(SpecialKeywords.CRYPT);
 
         typeLogin(cryptoTool.decryptByPattern(R.TESTDATA.get("login"), CRYPTO_PATTERN).
