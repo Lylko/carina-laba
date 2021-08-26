@@ -1,8 +1,15 @@
 package com.qaprosoft.carina.demo.amazon;
 
+import com.qaprosoft.apitools.validation.JsonCompareKeywords;
+import com.qaprosoft.carina.core.foundation.api.http.HttpClient;
+import com.qaprosoft.carina.core.foundation.api.http.HttpResponseStatusType;
+import com.qaprosoft.carina.demo.api.GetMethod;
+import com.qaprosoft.carina.demo.api.GetUserMethods;
 import com.qaprosoft.carina.demo.gui.components.*;
 import com.qaprosoft.carina.demo.gui.pages.*;
+import io.restassured.specification.RequestSpecification;
 import org.apache.commons.collections.CollectionUtils;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -18,23 +25,6 @@ import java.util.List;
  * @author qpsdemo
  */
 public class WebTest implements IAbstractTest {
-
-    @Test()
-    public void testLogin(){
-
-        HomePage home = new HomePage(getDriver());
-        home.open();
-        Assert.assertTrue(home.isPageOpened(), "Home page is not opened!");
-
-        NavigationTools navigationTools = new NavigationTools(getDriver());
-        navigationTools.tapLoginBtn();
-
-        LoginPage loginPage = new LoginPage(getDriver());
-        loginPage.makeLogin();
-
-        Assert.assertEquals(home.getHelloText(), "Hello, Igor", "User not authorised");
-
-    }
 
     @Test()
     public void testSignOut(){
@@ -151,48 +141,6 @@ public class WebTest implements IAbstractTest {
     }
 
     @Test()
-    public void testDeleteFromCart(){
-
-        HomePage home = new HomePage(getDriver());
-        home.open();
-        Assert.assertTrue(home.isPageOpened(), "Home page is not opened!");
-
-        NavigationTools navigationTools = new NavigationTools(getDriver());
-        navigationTools.tapLoginBtn();
-
-        LoginPage loginPage = new LoginPage(getDriver());
-        loginPage.makeLogin();
-        Assert.assertEquals(home.getHelloText(), "Hello, Igor", "User not authorised");
-
-        navigationTools.changeCountry();
-        Assert.assertTrue(navigationTools.getCountryName().contains("Canada"));
-        navigationTools.tapSearchBtn();
-        navigationTools.typeInSearchField("keyboard");
-        navigationTools.tapSearchBtn();
-
-        SearchPage searchPage = new SearchPage(getDriver());
-        Assert.assertFalse(CollectionUtils.isEmpty(searchPage.getSearchItems()), "No available items found!");
-        int randomNum = (int) (Math.random() * searchPage.getSearchItems().size());
-        SearchItem item = searchPage.getSearchItems().get(randomNum);
-        item.tapLinkToItem();
-
-        ItemPage itemPage = new ItemPage(getDriver());
-        int prev = navigationTools.getCartCount();
-        itemPage.tapAddToCartBtn();
-        pause(3);
-        home.open();
-        Assert.assertTrue(navigationTools.getCartCount() > prev, "Product not added to cart!");
-
-        navigationTools.tapCartBtn();
-        CartPage cartPage = new CartPage(getDriver());
-        Assert.assertTrue(cartPage.isPageOpened(), "Cart page is not opened!");
-        prev = navigationTools.getCartCount();
-        cartPage.getListOfCartItems().get(0).tapDeleteBtn();
-        Assert.assertTrue(navigationTools.getCartCount() < prev, "Product not deleted from cart!");
-
-    }
-
-    @Test()
     public void testSearchField(){
 
         HomePage home = new HomePage(getDriver());
@@ -211,46 +159,6 @@ public class WebTest implements IAbstractTest {
         for (int i = 0; i < n; i++){
             Assert.assertTrue(searchItems.get(i).getLinkToItemText().contains("RTX 2060"));
         }
-
-    }
-
-    @Test()
-    public void testChangingAccountName(){
-
-        HomePage home = new HomePage(getDriver());
-        home.open();
-        Assert.assertTrue(home.isPageOpened(), "Home page is not opened!");
-
-        NavigationTools navigationTools = new NavigationTools(getDriver());
-        navigationTools.tapLoginBtn();
-        LoginPage loginPage = new LoginPage(getDriver());
-        loginPage.makeLogin();
-        Assert.assertEquals(home.getHelloText(), "Hello, Igor", "User not authorised");
-
-        navigationTools.hoverLoginBtn();
-        navigationTools.tapAccountBtn();
-
-        AccountPage accountPage = new AccountPage(getDriver());
-        Assert.assertTrue(accountPage.isPageOpened(), "Account page is not opened!");
-        accountPage.tapLoginAndSecurityBtn();
-
-        SecurityPage securityPage = new SecurityPage(getDriver());
-        securityPage.tapEditNameBtn();
-        securityPage.typeName("asd");
-        securityPage.tapSaveBtn();
-        Assert.assertTrue(home.getHelloText().contains("asd"), "Name is not changed");
-
-        home.open();
-
-        navigationTools.hoverLoginBtn();
-        navigationTools.tapAccountBtn();
-
-        Assert.assertTrue(accountPage.isPageOpened(), "Account page is not opened!");
-        accountPage.tapLoginAndSecurityBtn();
-        securityPage.tapEditNameBtn();
-        securityPage.typeName("Igor");
-        securityPage.tapSaveBtn();
-        Assert.assertTrue(home.getHelloText().contains("Igor"), "Name is not changed");
 
     }
 
@@ -280,6 +188,7 @@ public class WebTest implements IAbstractTest {
         Assert.assertTrue(searchPage.getSearchItems().get(0).getItemCurrency().contains("RUB"),
                 "Currency is not correct!");
     }
+
 
 }
 
