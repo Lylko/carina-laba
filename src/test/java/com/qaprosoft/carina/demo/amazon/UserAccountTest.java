@@ -98,27 +98,6 @@ public class UserAccountTest implements IAbstractTest {
     }
 
     @Test()
-    public void testChangingAccountName(){
-
-        NavigationTools navigationTools = new NavigationTools(getDriver());
-        HomePage home = new HomePage(getDriver());
-
-        navigationTools.hoverLoginBtn();
-        navigationTools.tapAccountBtn();
-
-        AccountPage accountPage = new AccountPage(getDriver());
-        Assert.assertTrue(accountPage.isPageOpened(), "Account page is not opened!");
-        accountPage.tapLoginAndSecurityBtn();
-
-        SecurityPage securityPage = new SecurityPage(getDriver());
-        securityPage.tapEditNameBtn();
-        securityPage.typeName("asd");
-        securityPage.tapSaveBtn();
-        Assert.assertTrue(home.getHelloText().contains("asd"), "Name is not changed");
-
-    }
-
-    @Test()
     public void testCurrencyChanger(){
 
         HomePage home = new HomePage(getDriver());
