@@ -16,7 +16,9 @@
 
 	<test name="User API tests">
 		<classes>
-			<class name="com.qaprosoft.carina.demo.APISampleTest" />
+			<class name="com.qaprosoft.carina.demo.weather.CountryIdTest" />
+			<class name="com.qaprosoft.carina.demo.weather.ZipCodeTest" />
+			<class name="com.qaprosoft.carina.demo.weather.CityNameTest" />
 		</classes>
 	</test>
 

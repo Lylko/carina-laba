@@ -32,7 +32,6 @@ public class CryptoSampleTest implements IAbstractTest {
         Assert.assertEquals(R.TESTDATA.get("test_credentials"), "test@gmail.com/EncryptMe");
     }
 
-
     @Test
     public void testEncryption() {
         Assert.assertEquals(R.CONFIG.get("password"), "EncryptMe");

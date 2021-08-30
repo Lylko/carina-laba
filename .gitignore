@@ -1,4 +1,5 @@
 *.class
+src/main/resources/crypto.key
 
 # Package Files #
 *.jar
