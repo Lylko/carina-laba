@@ -1,15 +1,8 @@
 package com.qaprosoft.carina.demo.amazon;
 
-import com.qaprosoft.apitools.validation.JsonCompareKeywords;
-import com.qaprosoft.carina.core.foundation.api.http.HttpClient;
-import com.qaprosoft.carina.core.foundation.api.http.HttpResponseStatusType;
-import com.qaprosoft.carina.demo.api.GetMethod;
-import com.qaprosoft.carina.demo.api.GetUserMethods;
 import com.qaprosoft.carina.demo.gui.components.*;
 import com.qaprosoft.carina.demo.gui.pages.*;
-import io.restassured.specification.RequestSpecification;
 import org.apache.commons.collections.CollectionUtils;
-import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

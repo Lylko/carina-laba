@@ -70,7 +70,7 @@ public class APISampleTest implements IAbstractTest {
         getUsersMethods.expectResponseStatus(HttpResponseStatusType.OK_200);
         getUsersMethods.callAPI();
         getUsersMethods.validateResponse(JSONCompareMode.STRICT, JsonCompareKeywords.ARRAY_CONTAINS.getKey());
-        getUsersMethods.validateResponseAgainstSchema("api/users/_get/rs.schema");
+        getUsersMethods.validateResponseAgainstSchema("api/users/_get/jsonplace/rs.schema");
     }
 
     @Test()
