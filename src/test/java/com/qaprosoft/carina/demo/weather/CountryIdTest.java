@@ -18,9 +18,10 @@ public class CountryIdTest implements IAbstractTest {
         String rs = getMethod.callAPI().asString();
         getMethod.validateResponseAgainstSchema("api/weather/_get/rs.schema");
 
-        Assert.assertEquals(new JsonPath(rs).getInt("timezone"), 3600, "Time zone is incorrect!");
-        Assert.assertEquals(new JsonPath(rs).getString("name"), "London", "City name is incorrect!");
-        Assert.assertEquals(new JsonPath(rs).getString("sys.country"), "GB", "Country code is incorrect!");
+        JsonPath jsonPath = new JsonPath(rs);
+        Assert.assertEquals(jsonPath.getInt("timezone"), 3600, "Time zone is incorrect!");
+        Assert.assertEquals(jsonPath.getString("name"), "London", "City name is incorrect!");
+        Assert.assertEquals(jsonPath.getString("sys.country"), "GB", "Country code is incorrect!");
     }
 
     @Test
@@ -29,7 +30,7 @@ public class CountryIdTest implements IAbstractTest {
         GetWeatherMethod api = new GetWeatherMethod();
         api.expectResponseStatus(HttpResponseStatusType.OK_200);
         api.addParameter("id", "2017370");
-        api.callAPI().asString();
+        api.callAPI();
         api.validateResponseAgainstSchema("api/weather/_get/rs.schema");
         api.getProperties().replace("timeZone", "skip", 25200);
         api.getProperties().replace("cityName", "skip", "Russia");
