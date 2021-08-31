@@ -22,7 +22,7 @@ import java.util.Properties;
 
 public class GetWeatherMethod extends AbstractApiMethodV2 {
     public GetWeatherMethod() {
-        super(null, "api/weather/_get/rs.json", new Properties());
+        super(null, "api/weather/_get/rs.json", "api/weather/weather.properties");
         replaceUrlPlaceholder("base_url", Configuration.getEnvArg("api_url"));
         addParameter("appId", Credentials.getApiKey());
     }

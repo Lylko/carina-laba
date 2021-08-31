@@ -3,6 +3,7 @@ package com.qaprosoft.carina.demo.local;
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
 import com.qaprosoft.carina.core.foundation.api.http.HttpResponseStatusType;
 import com.qaprosoft.carina.demo.api.local.DeletePostsMethod;
+import com.qaprosoft.carina.demo.api.local.GetCommentMethod;
 import com.qaprosoft.carina.demo.api.local.PatchCommentMethod;
 import com.qaprosoft.carina.demo.api.local.PostCommentMethod;
 import org.testng.annotations.Test;
@@ -11,25 +12,38 @@ public class LocalRestApiTest implements IAbstractTest {
 
     @Test()
     public void testDeletePostMethod(){
-        DeletePostsMethod deletePostsMethod = new DeletePostsMethod();
-        deletePostsMethod.expectResponseStatus(HttpResponseStatusType.OK_200);
-        deletePostsMethod.callAPI();
+        DeletePostsMethod api = new DeletePostsMethod();
+        api.expectResponseStatus(HttpResponseStatusType.OK_200);
+        api.callAPI();
+        api.validateResponse();
     }
 
     @Test()
     public void testPatchCommentMethod(){
-        PatchCommentMethod patchCommentMethod = new PatchCommentMethod();
-        patchCommentMethod.getProperties().remove("commentId");
-        patchCommentMethod.getProperties().remove("postId");
-        patchCommentMethod.expectResponseStatus(HttpResponseStatusType.OK_200);
-        patchCommentMethod.callAPI();
+        PatchCommentMethod api = new PatchCommentMethod();
+        api.getProperties().remove("id");
+        api.getProperties().remove("postId");
+        api.expectResponseStatus(HttpResponseStatusType.OK_200);
+        api.callAPI();
+        api.getProperties().put("id", 5);
+        api.getProperties().put("postId", 3);
+        api.validateResponse();
     }
 
     @Test()
     public void testPostCommentMethod(){
-        PostCommentMethod postCommentMethod = new PostCommentMethod();
-        postCommentMethod.expectResponseStatus(HttpResponseStatusType.CREATED_201);
-        postCommentMethod.callAPI();
+        PostCommentMethod api = new PostCommentMethod();
+        api.expectResponseStatus(HttpResponseStatusType.CREATED_201);
+        api.callAPI();
+        api.validateResponse();
+    }
+
+    @Test()
+    public void testGetCommentMethod(){
+        GetCommentMethod api = new GetCommentMethod();
+        api.expectResponseStatus(HttpResponseStatusType.OK_200);
+        api.callAPI();
+        api.validateResponse();
     }
 
 }

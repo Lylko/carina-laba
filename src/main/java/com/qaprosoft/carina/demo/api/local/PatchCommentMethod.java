@@ -7,7 +7,7 @@ import com.qaprosoft.carina.demo.api.openweather.Credentials;
 
 public class PatchCommentMethod extends AbstractApiMethodV2 {
     public PatchCommentMethod(){
-        super("api/local/_patch/rq.json", null, "api/local/local.properties");
+        super("api/local/_patch/rq.json", "api/local/_patch/rs.json", "api/local/local.properties");
         replaceUrlPlaceholder("base_url", Configuration.getEnvArg("api_url"));
     }
 }

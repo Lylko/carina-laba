@@ -12,39 +12,40 @@ public class CityNameTest implements IAbstractTest {
     @Test
     public void testByNameMinsk(){
 
-        GetWeatherMethod getMethod = new GetWeatherMethod();
-        getMethod.expectResponseStatus(HttpResponseStatusType.OK_200);
-        getMethod.addParameter("q", "Minsk");
-        String rs = getMethod.callAPI().asString();
-        getMethod.validateResponseAgainstSchema("api/weather/_get/rs.schema");
-
-        Assert.assertEquals(new JsonPath(rs).getString("sys.country"), "BY", "Country name is incorrect!");
-        Assert.assertEquals(new JsonPath(rs).getInt("sys.id"), 8939, "Id value is incorrect!");
+        GetWeatherMethod api = new GetWeatherMethod();
+        api.expectResponseStatus(HttpResponseStatusType.OK_200);
+        api.addParameter("q", "Minsk");
+        String rs = api.callAPI().asString();
+        api.validateResponseAgainstSchema("api/weather/_get/rs.schema");
+        api.getProperties().replace("sysId", "skip", 8939);
+        api.getProperties().replace("countryId", "skip", "BY");
+        api.validateResponse();
     }
 
     @Test
     public void testByNameKiev(){
 
-        GetWeatherMethod getMethod = new GetWeatherMethod();
-        getMethod.expectResponseStatus(HttpResponseStatusType.OK_200);
-        getMethod.addParameter("q", "Kiev");
-        String rs = getMethod.callAPI().asString();
-        getMethod.validateResponseAgainstSchema("api/weather/_get/rs.schema");
+        GetWeatherMethod api = new GetWeatherMethod();
+        api.expectResponseStatus(HttpResponseStatusType.OK_200);
+        api.addParameter("q", "Kiev");
+        String rs = api.callAPI().asString();
+        api.validateResponseAgainstSchema("api/weather/_get/rs.schema");
+        api.getProperties().replace("sysId", "skip", 2003742);
+        api.getProperties().replace("countryId", "skip", "UA");
+        api.validateResponse();
 
-        Assert.assertEquals(new JsonPath(rs).getString("sys.country"), "UA", "Country name is incorrect!");
-        Assert.assertEquals(new JsonPath(rs).getInt("sys.id"), 2003742, "Id value is incorrect!");
     }
 
     @Test
     public void testByNameMoscow(){
 
-        GetWeatherMethod getMethod = new GetWeatherMethod();
-        getMethod.expectResponseStatus(HttpResponseStatusType.OK_200);
-        getMethod.addParameter("q", "Moscow");
-        String rs = getMethod.callAPI().asString();
-        getMethod.validateResponseAgainstSchema("api/weather/_get/rs.schema");
-
-        Assert.assertEquals(new JsonPath(rs).getString("sys.country"), "RU", "Country name is incorrect!");
-        Assert.assertEquals(new JsonPath(rs).getInt("sys.id"), 2009195, "Id value is incorrect!");
+        GetWeatherMethod api = new GetWeatherMethod();
+        api.expectResponseStatus(HttpResponseStatusType.OK_200);
+        api.addParameter("q", "Moscow");
+        api.callAPI();
+        api.validateResponseAgainstSchema("api/weather/_get/rs.schema");
+        api.getProperties().replace("sysId", "skip", 2009195);
+        api.getProperties().replace("countryId", "skip", "RU");
+        api.validateResponse();
     }
 }

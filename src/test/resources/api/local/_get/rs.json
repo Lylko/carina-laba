@@ -1,0 +1,5 @@
+{
+  "postId": "regex:[\\d]+",
+  "id": "regex:[\\d]+",
+  "body": "regex:[a-zA-Z\\d]+"
+}

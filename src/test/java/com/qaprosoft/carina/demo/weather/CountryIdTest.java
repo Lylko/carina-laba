@@ -10,34 +10,6 @@ import org.testng.annotations.Test;
 public class CountryIdTest implements IAbstractTest {
 
     @Test
-    public void testByIdRussia(){
-
-        GetWeatherMethod getMethod = new GetWeatherMethod();
-        getMethod.expectResponseStatus(HttpResponseStatusType.OK_200);
-        getMethod.addParameter("id", "2017370");
-        String rs = getMethod.callAPI().asString();
-        getMethod.validateResponseAgainstSchema("api/weather/_get/rs.schema");
-
-        Assert.assertEquals(new JsonPath(rs).getInt("timezone"), 25200, "Time zone is incorrect!");
-        Assert.assertEquals(new JsonPath(rs).getString("name"), "Russia", "Time zone is incorrect!");
-        Assert.assertEquals(new JsonPath(rs).getString("sys.country"), "RU", "Time zone is incorrect!");
-    }
-
-    @Test
-    public void testByIdMinsk(){
-
-        GetWeatherMethod getMethod = new GetWeatherMethod();
-        getMethod.expectResponseStatus(HttpResponseStatusType.OK_200);
-        getMethod.addParameter("id", "625144");
-        String rs = getMethod.callAPI().asString();
-        getMethod.validateResponseAgainstSchema("api/weather/_get/rs.schema");
-
-        Assert.assertEquals(new JsonPath(rs).getInt("timezone"), 10800, "Time zone is incorrect!");
-        Assert.assertEquals(new JsonPath(rs).getString("name"), "Minsk", "Time zone is incorrect!");
-        Assert.assertEquals(new JsonPath(rs).getString("sys.country"), "BY", "Time zone is incorrect!");
-    }
-
-    @Test
     public void testByIdLondon(){
 
         GetWeatherMethod getMethod = new GetWeatherMethod();
@@ -47,9 +19,36 @@ public class CountryIdTest implements IAbstractTest {
         getMethod.validateResponseAgainstSchema("api/weather/_get/rs.schema");
 
         Assert.assertEquals(new JsonPath(rs).getInt("timezone"), 3600, "Time zone is incorrect!");
-        Assert.assertEquals(new JsonPath(rs).getString("name"), "London", "Time zone is incorrect!");
-        Assert.assertEquals(new JsonPath(rs).getString("sys.country"), "GB", "Time zone is incorrect!");
+        Assert.assertEquals(new JsonPath(rs).getString("name"), "London", "City name is incorrect!");
+        Assert.assertEquals(new JsonPath(rs).getString("sys.country"), "GB", "Country code is incorrect!");
     }
 
+    @Test
+    public void testByIdRussia(){
+
+        GetWeatherMethod api = new GetWeatherMethod();
+        api.expectResponseStatus(HttpResponseStatusType.OK_200);
+        api.addParameter("id", "2017370");
+        api.callAPI().asString();
+        api.validateResponseAgainstSchema("api/weather/_get/rs.schema");
+        api.getProperties().replace("timeZone", "skip", 25200);
+        api.getProperties().replace("cityName", "skip", "Russia");
+        api.getProperties().replace("countryId", "skip", "RU");
+        api.validateResponse();
+    }
+
+    @Test
+    public void testByIdMinsk(){
+
+        GetWeatherMethod api = new GetWeatherMethod();
+        api.expectResponseStatus(HttpResponseStatusType.OK_200);
+        api.addParameter("id", "625144");
+        String rs = api.callAPI().asString();
+        api.validateResponseAgainstSchema("api/weather/_get/rs.schema");
+        api.getProperties().replace("timeZone", "skip", 10800);
+        api.getProperties().replace("cityName", "skip", "Minsk");
+        api.getProperties().replace("countryId", "skip", "BY");
+        api.validateResponse();
+    }
 
 }
