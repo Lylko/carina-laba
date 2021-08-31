@@ -1,5 +1,6 @@
 *.class
 src/main/resources/crypto.key
+.DS_Store
 
 # Package Files #
 *.jar

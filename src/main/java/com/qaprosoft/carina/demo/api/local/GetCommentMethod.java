@@ -6,7 +6,7 @@ import com.qaprosoft.carina.core.foundation.utils.Configuration;
 public class GetCommentMethod extends AbstractApiMethodV2 {
 
     public GetCommentMethod(){
-        super(null,null);
+        super(null,"api/local/_get/rs.json");
         replaceUrlPlaceholder("base_url", Configuration.getEnvArg("api_url"));
     }
 }

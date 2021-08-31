@@ -1,46 +1,33 @@
 {
   "coord": {
-    "lon": ,
-    "lat": 53.9
+    "lon": "regex:[\\d]+.[\\d]+",
+    "lat": "regex:[\\d]+.[\\d]+"
   },
   "weather": [
     {
-      "id": 804,
-      "main": "Clouds",
-      "description": "overcast clouds",
-      "icon": "04d"
+      "id": "regex:[\\d]+",
+      "main": "regex:[a-zA-z]+",
+      "description": "regex:[a-zA-z]+",
+      "icon": "regex:[\\d]+[a-zA-z]+"
     }
   ],
-  "base": "stations",
-  "main": {
-    "temp": 291.01,
-    "feels_like": 290.65,
-    "temp_min": 291.01,
-    "temp_max": 291.01,
-    "pressure": 1012,
-    "humidity": 69,
-    "sea_level": 1012,
-    "grnd_level": 987
-  },
-  "visibility": 10000,
-  "wind": {
-    "speed": 3.03,
-    "deg": 60,
-    "gust": 2.86
-  },
+  "base": "regex:[a-zA-z]+",
+  "main": "skip",
+  "visibility": "regex:[\\d]+",
+  "wind": "skip",
   "clouds": {
-    "all": 98
+    "all": "regex:[\\d]+"
   },
-  "dt": 1630067489,
+  "dt": "regex:[\\d]+",
   "sys": {
-    "type": 1,
-    "id": 8939,
-    "country": "BY",
-    "sunrise": 1630033769,
-    "sunset": 1630084409
+    "type": "regex:[\\d]+",
+    "id": ${sysId},
+    "country": "${countryId}",
+    "sunrise": "regex:[\\d]+",
+    "sunset": "regex:[\\d]+"
   },
-  "timezone": 10800,
-  "id": 625144,
-  "name": "Minsk",
-  "cod": 200
+  "timezone": ${timeZone},
+  "id": ${id},
+  "name": "${cityName}",
+  "cod": "regex:[\\d]+"
 }
