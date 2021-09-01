@@ -44,7 +44,7 @@ public class CountryIdTest implements IAbstractTest {
         GetWeatherMethod api = new GetWeatherMethod();
         api.expectResponseStatus(HttpResponseStatusType.OK_200);
         api.addParameter("id", "625144");
-        String rs = api.callAPI().asString();
+        api.callAPI();
         api.validateResponseAgainstSchema("api/weather/_get/rs.schema");
         api.getProperties().replace("timeZone", "skip", 10800);
         api.getProperties().replace("cityName", "skip", "Minsk");

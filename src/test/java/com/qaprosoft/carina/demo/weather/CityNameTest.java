@@ -15,7 +15,7 @@ public class CityNameTest implements IAbstractTest {
         GetWeatherMethod api = new GetWeatherMethod();
         api.expectResponseStatus(HttpResponseStatusType.OK_200);
         api.addParameter("q", "Minsk");
-        String rs = api.callAPI().asString();
+        api.callAPI();
         api.validateResponseAgainstSchema("api/weather/_get/rs.schema");
         api.getProperties().replace("sysId", "skip", 8939);
         api.getProperties().replace("countryId", "skip", "BY");
@@ -28,7 +28,7 @@ public class CityNameTest implements IAbstractTest {
         GetWeatherMethod api = new GetWeatherMethod();
         api.expectResponseStatus(HttpResponseStatusType.OK_200);
         api.addParameter("q", "Kiev");
-        String rs = api.callAPI().asString();
+        api.callAPI();
         api.validateResponseAgainstSchema("api/weather/_get/rs.schema");
         api.getProperties().replace("sysId", "skip", 2003742);
         api.getProperties().replace("countryId", "skip", "UA");
