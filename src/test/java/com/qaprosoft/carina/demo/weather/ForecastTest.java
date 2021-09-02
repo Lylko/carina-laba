@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static org.aspectj.runtime.internal.Conversions.doubleValue;
 import static org.aspectj.runtime.internal.Conversions.intValue;
 
 public class ForecastTest implements IAbstractTest {
@@ -25,5 +26,20 @@ public class ForecastTest implements IAbstractTest {
         Assert.assertEquals(number, 39, "Forecast is not on 5 days!");
     }
 
+    @Test()
+    public void testMaxTempFromForecast(){
+
+        GetForecastMethod api = new GetForecastMethod();
+        api.addParameter("q", "London");
+        String rs = api.callAPI().asString();
+        List<Float> list = new JsonPath(rs).getList("list.main.temp_max");
+        int i = 0;
+        List<Double> listOfNum = new ArrayList<>();
+        while(i < list.size()){
+            listOfNum.add(doubleValue(list.get(i)));
+            i++;
+        }
+        System.out.println(Collections.max(listOfNum));
+    }
 
 }
