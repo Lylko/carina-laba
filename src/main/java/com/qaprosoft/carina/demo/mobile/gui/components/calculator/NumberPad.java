@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class NumberPad extends AbstractUIObject {
 
     @FindBy(xpath = "//android.widget.Button[@content-desc='point']")
@@ -17,8 +19,17 @@ public class NumberPad extends AbstractUIObject {
     }
 
     public void tapDigitOnPad(String digit){
-        WebElement digitBtn = getDriver().findElement(By.id("com.google.android.calculator:id/digit_" + digit));
-        digitBtn.click();
+
+        List<String> digitList = List.of(digit.split(""));
+        if (digitList.size() == 1){
+            WebElement digitBtn = getDriver().findElement(By.id("digit_" + digit));
+            digitBtn.click();
+        } else {
+            for (String dig : digitList){
+                WebElement digitBtn = getDriver().findElement(By.id("digit_" + dig));
+                digitBtn.click();
+            }
+        }
     }
 
     public void tapPointBtn(){

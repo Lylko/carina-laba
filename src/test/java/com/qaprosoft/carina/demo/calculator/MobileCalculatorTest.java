@@ -26,7 +26,7 @@ public class MobileCalculatorTest implements IAbstractTest {
     @Test()
     public void testResultScreen(){
         NumberPad numberPad = new NumberPad(getDriver());
-        numberPad.tapDigitOnPad("6");
+        numberPad.tapDigitOnPad("61");
 
         OperatorPad operatorPad = new OperatorPad(getDriver());
         operatorPad.tapPlusBtn();
@@ -36,7 +36,6 @@ public class MobileCalculatorTest implements IAbstractTest {
 
         DisplayField displayField = new DisplayField(getDriver());
         displayField.getResultFieldText();
-        Assert.assertEquals(displayField.getResultFieldText(), "10", "Oh, shit! Here we go again!");
-
+        Assert.assertEquals(displayField.getResultFieldText(), "65", "Oh, shit! Here we go again!");
     }
 }

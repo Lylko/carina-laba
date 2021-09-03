@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class DisplayField extends AbstractUIObject {
 
-    @FindBy(id = "com.google.android.calculator:id/result_final")
+    @FindBy(id = "result_final")
     private ExtendedWebElement resultField;
 
     public DisplayField(WebDriver driver) {
