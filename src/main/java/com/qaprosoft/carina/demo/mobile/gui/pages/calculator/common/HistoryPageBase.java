@@ -8,4 +8,8 @@ public abstract class HistoryPageBase extends AbstractPage {
     public HistoryPageBase(WebDriver driver) {
         super(driver);
     }
+
+    public abstract boolean isOpened();
+
+    public abstract String getHistoryResultText();
 }
