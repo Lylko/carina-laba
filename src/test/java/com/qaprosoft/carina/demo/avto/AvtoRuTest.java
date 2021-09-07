@@ -26,19 +26,4 @@ public class AvtoRuTest implements IAbstractTest {
 //        }
     }
 
-    @Test()
-    public void TestTest(){
-
-        HomePage home = new HomePage(getDriver());
-        home.tapOptionsBtn();
-
-        OptionsPage optionsPage = new OptionsPage(getDriver());
-        optionsPage.chooseNewCars();
-        optionsPage.tapClearLocationBtn();
-        optionsPage.tapSearchBtn();
-
-        OfferPage offerPage = new OfferPage(getDriver());
-        System.out.println(offerPage.getThreeOfferItems().size());
-
-    }
 }

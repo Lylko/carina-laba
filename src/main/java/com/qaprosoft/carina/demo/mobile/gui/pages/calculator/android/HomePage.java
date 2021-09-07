@@ -1,8 +1,10 @@
 package com.qaprosoft.carina.demo.mobile.gui.pages.calculator.android;
 
+import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.utils.mobile.IMobileUtils;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.demo.mobile.gui.pages.calculator.common.HomePageBase;
+import com.qaprosoft.carina.demo.mobile.gui.pages.example.common.WelcomePageBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,6 +12,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
+@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = HomePageBase.class)
 public class HomePage extends HomePageBase implements IMobileUtils {
 
     @FindBy(xpath = "//android.widget.ImageView[@content-desc='More options']")
