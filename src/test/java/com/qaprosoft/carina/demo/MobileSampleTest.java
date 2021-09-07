@@ -38,13 +38,6 @@ import com.qaprosoft.carina.demo.utils.MobileContextUtils.View;
 public class MobileSampleTest implements IAbstractTest, IMobileUtils {
 
     @Test()
-    public void testTest(){
-        TestPage testPage = new TestPage(getDriver());
-        testPage.open();
-        pause(5);
-    }
-
-    @Test()
     @MethodOwner(owner = "qpsdemo")
     @TestLabel(name = "feature", value = {"mobile", "regression"})
     public void testLoginUser() {
