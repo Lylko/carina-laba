@@ -10,11 +10,18 @@ public class DisplayField extends AbstractUIObject {
     @FindBy(id = "result_final")
     private ExtendedWebElement resultField;
 
+    @FindBy(id = "formula")
+    private ExtendedWebElement formulaField;
+
     public DisplayField(WebDriver driver) {
         super(driver);
     }
 
     public String getResultFieldText(){
         return resultField.getText();
+    }
+
+    public String getFormula(){
+        return formulaField.getText();
     }
 }

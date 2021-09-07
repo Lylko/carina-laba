@@ -5,8 +5,6 @@ import org.openqa.selenium.WebDriver;
 
 public class ModelPage extends AbstractPage {
 
-
-
     public ModelPage(WebDriver driver) {
         super(driver);
     }

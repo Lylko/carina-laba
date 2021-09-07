@@ -3,13 +3,9 @@ package com.qaprosoft.carina.demo.mobile.gui.pages.calculator.common;
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
 
-public abstract class HomePageBase extends AbstractPage {
+public abstract class HistoryPageBase extends AbstractPage {
 
-    public HomePageBase(WebDriver driver) {
+    public HistoryPageBase(WebDriver driver) {
         super(driver);
     }
-
-    public abstract void tapSettingBtn();
-
-    public abstract void openHistory();
 }

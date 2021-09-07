@@ -1,18 +1,34 @@
 package com.qaprosoft.carina.demo.avto;
 
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
-import com.qaprosoft.carina.demo.mobile.gui.components.avto.OfferItem;
 import com.qaprosoft.carina.demo.mobile.gui.pages.avto.android.HomePage;
+import com.qaprosoft.carina.demo.mobile.gui.pages.avto.android.OfferPage;
 import com.qaprosoft.carina.demo.mobile.gui.pages.avto.android.OptionsPage;
-import io.appium.java_client.TouchAction;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class AvtoRuTest implements IAbstractTest {
 
     @Test()
     public void testAuto(){
-        pause(2);
+
+        HomePage home = new HomePage(getDriver());
+        home.tapOptionsBtn();
+
+        OptionsPage optionsPage = new OptionsPage(getDriver());
+        optionsPage.chooseNewCars();
+        optionsPage.tapClearLocationBtn();
+        optionsPage.tapSearchBtn();
+//
+//        OfferPage offerPage = new OfferPage(getDriver());
+//        offerPage.swipePage();
+//        for (OfferItem offerItem : offerPage.getOfferItemList()){
+//            System.out.println(offerItem.getCarName());
+//        }
+    }
+
+    @Test()
+    public void TestTest(){
+
         HomePage home = new HomePage(getDriver());
         home.tapOptionsBtn();
 
@@ -21,9 +37,8 @@ public class AvtoRuTest implements IAbstractTest {
         optionsPage.tapClearLocationBtn();
         optionsPage.tapSearchBtn();
 
-        OfferItem offerItem = new OfferItem(getDriver());
-        System.out.println(offerItem.getCarName());
-
+        OfferPage offerPage = new OfferPage(getDriver());
+        System.out.println(offerPage.getThreeOfferItems().size());
 
     }
 }

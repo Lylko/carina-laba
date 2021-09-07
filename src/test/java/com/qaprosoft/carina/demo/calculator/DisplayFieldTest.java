@@ -4,27 +4,27 @@ import com.qaprosoft.carina.core.foundation.IAbstractTest;
 import com.qaprosoft.carina.demo.mobile.gui.components.calculator.DisplayField;
 import com.qaprosoft.carina.demo.mobile.gui.components.calculator.NumberPad;
 import com.qaprosoft.carina.demo.mobile.gui.components.calculator.OperatorPad;
+import com.qaprosoft.carina.demo.mobile.gui.pages.calculator.android.HomePage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class MobileCalculatorTest implements IAbstractTest {
+public class DisplayFieldTest implements IAbstractTest {
 
     @Test()
-    public void testNumPad(){
+    public void testFormulaField(){
         NumberPad numberPad = new NumberPad(getDriver());
-        numberPad.tapDigitOnPad("1");
-        pause(5);
-        numberPad.tapDigitOnPad("3");
-        numberPad.tapDigitOnPad("2");
+        numberPad.tapDigitOnPad("129");
 
         OperatorPad operatorPad = new OperatorPad(getDriver());
         operatorPad.tapDeleteBtn();
-        pause(5);
+
+        DisplayField displayField = new DisplayField(getDriver());
+        Assert.assertEquals(displayField.getFormula(), "12", "The field shows an incorrect result!");
 
     }
 
     @Test()
-    public void testResultScreen(){
+    public void testResultField(){
         NumberPad numberPad = new NumberPad(getDriver());
         numberPad.tapDigitOnPad("61");
 
@@ -35,7 +35,7 @@ public class MobileCalculatorTest implements IAbstractTest {
         operatorPad.tapEqualsBtn();
 
         DisplayField displayField = new DisplayField(getDriver());
-        displayField.getResultFieldText();
         Assert.assertEquals(displayField.getResultFieldText(), "65", "Oh, shit! Here we go again!");
     }
+
 }
