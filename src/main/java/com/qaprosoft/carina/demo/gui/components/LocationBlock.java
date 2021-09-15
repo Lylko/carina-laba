@@ -13,9 +13,6 @@ public class LocationBlock extends AbstractUIObject {
     @FindBy(xpath = "//select[@id = 'GLUXCountryList']")
     private ExtendedWebElement locationSelector;
 
-    @FindBy(xpath = "//div[@class ='a-popover-wrapper']//a[contains(text(), 'Canada')]")
-    private ExtendedWebElement changeToCanadaBtn;
-
     @FindBy(xpath = "//div[@class = 'a-popover-wrapper']//button[@type = 'button']")
     private ExtendedWebElement submitBtn;
 
@@ -27,8 +24,10 @@ public class LocationBlock extends AbstractUIObject {
         locationSelector.click();
     }
 
-    public void tapChangeToCanadaBtn() {
-        changeToCanadaBtn.click();
+    public void chooseCountry(String country) {
+        ExtendedWebElement webElement = findExtendedWebElement(By.xpath
+                ("//div[@class ='a-popover-wrapper']//a[contains(text(), '" + country + "')]"));
+        webElement.click();
     }
 
     public void tapSubmitBtn() {

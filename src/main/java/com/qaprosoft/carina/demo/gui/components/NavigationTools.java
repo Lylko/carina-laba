@@ -37,6 +37,13 @@ public class NavigationTools extends AbstractUIObject {
     @FindBy(xpath = "//span[contains(text(),'Sign Out')]")
     private ExtendedWebElement signOutBtn;
 
+    @FindBy(xpath = "//div[@id = 'nav-global-location-slot']//" +
+            "span[contains(text(), 'Deliver')]/following-sibling::span")
+    private ExtendedWebElement deliveryZone;
+
+    @FindBy(xpath = "//span[contains(text(),'Watchlist')]/ancestor::a")
+    private ExtendedWebElement watchListBtn;
+
     public NavigationTools(WebDriver driver) {
         super(driver);
     }
@@ -69,12 +76,16 @@ public class NavigationTools extends AbstractUIObject {
         changeLangBtn.click();
     }
 
-    public void changeCountry(){
+    public void changeCountry(String country){
         LocationBlock locationBlock = new LocationBlock(getDriver());
         locationBtn.click();
         locationBlock.chooseLocationSelector();
-        locationBlock.tapChangeToCanadaBtn();
+        locationBlock.chooseCountry(country);
         locationBlock.tapSubmitBtn();
+    }
+
+    public String getDeliveryZoneName(){
+        return deliveryZone.getText();
     }
 
     public void tapSignOutBtn(){
@@ -91,5 +102,10 @@ public class NavigationTools extends AbstractUIObject {
 
     public void tapAccountBtn() {
         accountBtn.click();
+    }
+
+    public void openWatchListPage(){
+        loginBtn.hover();
+        watchListBtn.click();
     }
 }

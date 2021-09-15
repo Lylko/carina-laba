@@ -3,6 +3,7 @@ package com.qaprosoft.carina.demo.amazon;
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
 import com.qaprosoft.carina.demo.gui.components.NavigationTools;
 import com.qaprosoft.carina.demo.gui.pages.*;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
@@ -74,6 +75,16 @@ public class UserAccountTest implements IAbstractTest {
 
     }
 
+    @AfterClass()
+    public void clearDeliveryZoneChanges(){
+
+        NavigationTools navigationTools = new NavigationTools(getDriver());
+        navigationTools.changeCountry("Belarus");
+        Assert.assertEquals(navigationTools.getDeliveryZoneName(), "Belarus", "Incorrect delivery zone");
+
+
+    }
+
 
 
     @Test()
@@ -120,6 +131,15 @@ public class UserAccountTest implements IAbstractTest {
 
         Assert.assertTrue(searchPage.getSearchItems().get(0).getItemCurrency().contains("$"),
                 "Currency is not correct!");
+    }
+
+    @Test()
+    public void testDeliveryZoneChange(){
+
+        NavigationTools navigationTools = new NavigationTools(getDriver());
+        navigationTools.changeCountry("Canada");
+        Assert.assertEquals(navigationTools.getDeliveryZoneName(), "Canada", "Incorrect delivery zone");
+
     }
 
 }
