@@ -1,10 +1,12 @@
 package com.qaprosoft.carina.demo.amazon;
 
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
-import com.qaprosoft.carina.demo.gui.components.CartItem;
+import com.qaprosoft.carina.demo.gui.components.market.CartItem;
 import com.qaprosoft.carina.demo.gui.components.NavigationTools;
 import com.qaprosoft.carina.demo.gui.components.SearchItem;
 import com.qaprosoft.carina.demo.gui.pages.*;
+import com.qaprosoft.carina.demo.gui.pages.market.CartPage;
+import com.qaprosoft.carina.demo.gui.pages.market.ItemPage;
 import org.apache.commons.collections.CollectionUtils;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -52,7 +54,7 @@ public class CartTest implements IAbstractTest {
         NavigationTools navigationTools = new NavigationTools(getDriver());
         HomePage home = new HomePage(getDriver());
 
-        navigationTools.changeCountry();
+        navigationTools.changeCountry("Canada");
         Assert.assertTrue(navigationTools.getCountryName().contains("Canada"));
         navigationTools.tapSearchBtn();
         navigationTools.typeInSearchField("keyboard");
@@ -79,7 +81,7 @@ public class CartTest implements IAbstractTest {
         NavigationTools navigationTools = new NavigationTools(getDriver());
         HomePage home = new HomePage(getDriver());
 
-        navigationTools.changeCountry();
+        navigationTools.changeCountry("Canada");
         Assert.assertTrue(navigationTools.getCountryName().contains("Canada"));
         navigationTools.tapSearchBtn();
         navigationTools.typeInSearchField("keyboard");

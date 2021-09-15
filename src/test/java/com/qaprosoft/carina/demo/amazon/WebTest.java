@@ -1,7 +1,11 @@
 package com.qaprosoft.carina.demo.amazon;
 
 import com.qaprosoft.carina.demo.gui.components.*;
+import com.qaprosoft.carina.demo.gui.components.market.DealsItem;
 import com.qaprosoft.carina.demo.gui.pages.*;
+import com.qaprosoft.carina.demo.gui.pages.market.DealsAndPromotionsPage;
+import com.qaprosoft.carina.demo.gui.pages.movie.MovieStorePage;
+import com.qaprosoft.carina.demo.gui.pages.movie.WatchListPage;
 import org.apache.commons.collections.CollectionUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -107,33 +111,6 @@ public class WebTest implements IAbstractTest {
     }
 
     @Test()
-    public void testAddingDealToCart(){
-
-        HomePage home = new HomePage(getDriver());
-        home.open();
-        Assert.assertTrue(home.isPageOpened(), "Home page is not opened!");
-
-        NavigationMenu navigationMenu = new NavigationMenu(getDriver());
-        navigationMenu.openDealsPage();
-
-        DealsAndPromotionsPage dealsPage = new DealsAndPromotionsPage(getDriver());
-        Assert.assertEquals(dealsPage.getPageName(), "Deals and Promotions",
-                "Page with deals is not opened");
-
-        NavigationTools navigationTools = new NavigationTools(getDriver());
-        navigationTools.changeCountry();
-        int prev = navigationTools.getCartCount();
-
-        int randomNum = (int) (Math.random() * dealsPage.getListOfDeals().size());
-        DealsItem item = dealsPage.getOnlyAvailableDeals().get(randomNum);
-        item.tapAddToCartBtn();
-        pause(1);
-        Assert.assertTrue(navigationTools.getCartCount() > prev,
-                "Product not added to cart via deal page!");
-
-    }
-
-    @Test()
     public void testSearchField(){
 
         HomePage home = new HomePage(getDriver());
@@ -182,6 +159,26 @@ public class WebTest implements IAbstractTest {
                 "Currency is not correct!");
     }
 
+    @Test()
+    public void testWatchListItems(){
+
+        HomePage home = new HomePage(getDriver());
+        home.open();
+
+        NavigationTools navigationTools = new NavigationTools(getDriver());
+        navigationTools.tapLoginBtn();
+
+        LoginPage loginPage = new LoginPage(getDriver());
+        loginPage.makeLogin();
+
+        navigationTools.openWatchListPage();
+
+        WatchListPage watchListPage = new WatchListPage(getDriver());
+        watchListPage.chooseMovieCategory();
+
+        Assert.assertTrue(watchListPage.getListOfMovies().get(0).getMovieName().
+                contains("Are We Done"), "Name is incorrect");
+    }
 
 }
 

@@ -1,7 +1,7 @@
-package com.qaprosoft.carina.demo.gui.pages;
+package com.qaprosoft.carina.demo.gui.pages.market;
 
 import com.qaprosoft.carina.core.gui.AbstractPage;
-import com.qaprosoft.carina.demo.gui.components.CartItem;
+import com.qaprosoft.carina.demo.gui.components.market.CartItem;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
